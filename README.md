@@ -1,3 +1,4 @@
+# Interview_Questions
 ## General
 1. Find the most frequent integer in an array
 2. Find pairs in an integer array whose sum is equal to 10 (bonus: do it in linear time)
@@ -65,3 +66,6 @@
 3. Implement insertion sort
 4. Implement merge sort
 5. Implement quick sort
+=======
+
+
