@@ -1,5 +1,6 @@
 #!/bin/env/python
 # quicksort.py
+# Tui Popenoe
 
 def quicksort(lst):
     """Quicksort using list comprehensions"""
