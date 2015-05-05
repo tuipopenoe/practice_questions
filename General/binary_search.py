@@ -7,7 +7,6 @@ def binary_search(a, x, lo=0, hi=None):
         hi = len(a) - 1
     while lo < hi:
         mid = (lo + hi) // 2
-        print(mid)
         if a[mid] == x:
             return mid
         elif a[mid] < x:
