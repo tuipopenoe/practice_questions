@@ -106,7 +106,28 @@ class BinarySearchTree(object):
             node.left = node.right
             node.right = temp
 
-    def 
+    def double_tree(self, node):
+        """Insert a duplicate of every node as the left child."""
+        if not node:
+            return
+        else:
+            self.double_tree(node.left)
+            self.double_tree(node.right)
+            temp = node.left
+            node.left = Node(node.data)
+            node.left.left = temp
+
+    def same_tree(self, node_a, node_b):
+        """Return True if both trees are equal, else return False."""
+        if not node_a and not node_b:
+            return
+        elif node_a.data == node_b.data:
+            self.same_tree(node_a.left, node_b.left)
+            self.same_tree(node_a.right, node_b.right)
+        else:
+            return False
+        return True
+
 
 class Node(object):
     """Node class in a binary search tree."""
