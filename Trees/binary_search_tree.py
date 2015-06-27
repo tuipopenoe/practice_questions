@@ -3,136 +3,91 @@
 # Binary Search Tree
 
 class BinarySearchTree(object):
-    """Binary Search Tree."""
-    def __init__(self, root=None):
-        self.root = root
+    """Binary Search Tree"""
+    def __init__(self):
+        self.root = None
+        self.size = 0
 
-    def lookup(self, node, target):
-        """Lookup the target node in the binary tree."""
-        if not node:
-            return False
+    def length(self):
+        return self.size
+
+    def __len__(self):
+        return self.size
+
+    def __iter__(self):
+        return self.root.__iter__()
+
+    def put(self, key, val):
+        if self.root:
+            self._put(key, val, self.root)
         else:
-            if target == node.data:
-                return True
+            self.root = TreeNode(key, val)
+        self.size = self.size + 1
+
+    def _put(self, key, val, current_node):
+        if key < current_node.key:
+            if current_node.has_left_child():
+                self._put(key, val, current_node.left_child)
             else:
-                if target < node.data:
-                    return self.lookup(node.left, target)
-                else:
-                    return self.lookup(node.right, target)
-
-    def insert(self, node, data):
-        """Insert the given node in the binary tree."""
-        if not node:
-            return Node(data)
+                current_node.left_child = TreeNode(key, val, parent=current_node)
         else:
-            if data < node.data:
-                node.left = self.insert(node.left, data)
+            if current_node.has_right_child():
+                self._put(key, val, current_node.right_child)
             else:
-                node.left = self.insert(node.right, data)
-            return
+                current_node.right_child = TreeNode(key, val, parent=current_node)
 
-    def size(self, node):
-        """Return the size of the binary tree."""
-        if not node:
-            return 0
-        else:
-            return self.size(node.right) + self.size(node.left) + 1
+    def __setitem__(self, k, v):
+        self.put(k, v)
 
-    def max_depth(self, node):
-        """Find the maximum depth of the binary tree."""
-        if not node:
-            return 0
-        else:
-            left_height = self.max_depth(node.left)
-            right_height = self.max_depth(node.right)
-            if left_height > right_height:
-                return left_height + 1
+    def get(self, key):
+        if self.root:
+            res = self._get(key, self.root)
+            if res:
+                return res.payload
             else:
-                return right_height + 1
-
-    def min_value(self, node):
-        """Find the minimum value in the binary tree."""
-        if not node.left:
-            return node.data
+                return None
         else:
-            return self.min_value(node.left)
+            return None
 
-    def max_value(self, node):
-        """Find the maximum value in the binary tree."""
-        if not node.right:
-            return node.data
-        else:
-            return self.max_value(node.right)
+class TreeNode(object):
+    """Binary Tree Node"""
+    def __init__(self, key, val, left=None, right=None, parent=None):
+        self.key = key
+        self.payload = val
+        self.left_child = left
+        self.right_child = right
+        self.parent = parent
 
-    def print_tree(self, node):
-        """Print inorder traversal of the binary tree."""
-        if not node:
-            return
-        else:
-            self.print_tree(node.left)
-            print(node.data, end=' ')
-            self.print_tree(node.right)
+    def has_left_child(self):
+        return self.left_child
 
-    def print_postorder(self, node):
-        """Print postorder traversal of the binary tree."""
-        if not node:
-            return
-        else:
-            self.print_tree(node.left)
-            self.print_tree(node.right)
-            print(node.data, end=' ')
+    def has_right_child(self):
+        return self.right_child
 
-    def print_preorder(self, node):
-        """Print preorder traversal of the binary tree."""
-        if not node:
-            return
-        else:
-            print(node.data, end=' ')
-            self.print_tree(node.left)
-            self.print_tree(node.right)
+    def is_left_child(self):
+        return self.parent and self.parent.left_child == self
 
-    def print_paths(self, node):
-        """Print all the root-to-leaf paths of the binary tree."""
-        # TODO
+    def is_right_child(self):
+        return self.parent and self.parent.right_child == self
 
-    def mirror(self, node):
-        """Mirror the binary tree."""
-        if not node:
-            return
-        else:
-            self.mirror(node.left)
-            self.mirror(node.right)
-            temp = node.left
-            node.left = node.right
-            node.right = temp
+    def is_root(self):
+        return not self.parent
 
-    def double_tree(self, node):
-        """Insert a duplicate of every node as the left child."""
-        if not node:
-            return
-        else:
-            self.double_tree(node.left)
-            self.double_tree(node.right)
-            temp = node.left
-            node.left = Node(node.data)
-            node.left.left = temp
+    def is_leaf(self):
+        return not (self.left_child or self.right_child)
 
-    def same_tree(self, node_a, node_b):
-        """Return True if both trees are equal, else return False."""
-        if not node_a and not node_b:
-            return
-        elif node_a.data == node_b.data:
-            self.same_tree(node_a.left, node_b.left)
-            self.same_tree(node_a.right, node_b.right)
-        else:
-            return False
-        return True
+    def has_any_children(self):
+        return self.left_child or self.right_child
 
+    def has_both_children(self):
+        return self.left_child and self.right_child
 
-class Node(object):
-    """Node class in a binary search tree."""
-    def __init__(self, data=None, left_child=None, right_child=None):
-        self.data = data
-        self.left_child = left_child
-        self.right_child = right_child
-
+    def replace_node_data(self, key, value, lc, rc):
+        self.key = key
+        self.payload = value
+        self.left_child = lc
+        self.right_child = rc
+        if self.has_left_child():
+            self.left_child.parent = self
+        if self.has_right_child():
+            self.right_child.parent = self
