@@ -2,4 +2,7 @@
 # atoi
 
 def atoi(s):
-    return ord('a')
+    if isinstance(s, basestring):
+        return ord(s)
+    else:
+        return -1
