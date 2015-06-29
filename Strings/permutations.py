@@ -16,10 +16,11 @@ def permute(string):
     for i in range(0, len(prev_list)):
         # For each permutation in the string
         for j in range(0, len(string)):
-            # Create permutation
+            # Add new character to every position in previous string
             new_string = prev_list[i][0:j] + string[0] + prev_list[i][j:len(string)-1]
             if new_string not in next_list:
                 next_list.append(new_string)
+    print(next_list)
     return next_list
 
 
