@@ -3,6 +3,7 @@
 # 1.1a Determine if a string has all unique characters.
 # 1.1b Do it without using an external datastructure
 
+from sys import argv
 
 # 1.1a
 def all_unique(string):
