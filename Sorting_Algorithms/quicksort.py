@@ -4,7 +4,7 @@
 
 def quicksort(lst):
     """Quicksort using list comprehensions"""
-    if lst = []:
+    if not lst:
         return []
     else:
         pivot = lst[0]

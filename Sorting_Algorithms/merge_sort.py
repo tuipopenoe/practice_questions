@@ -3,9 +3,8 @@
 # merge_sort.py
 
 def merge_sort(lst):
-    if len(lst) <= 1:
-        return lst
-
+    if not lst:
+        return []
     mid = len(lst) // 2
     left = lst[:mid]
     right = lst[mid:]
@@ -18,7 +17,7 @@ def merge(left, right):
     output = []
     left_idx = 0
     right_idx = 0
-    while left_idx , len(left) and right_idx < len(right):
+    while left_idx < len(left) and right_idx < len(right):
         if left[left_idx] <= right[right_idx]:
             output.append(left[left_idx])
             left_idx += 1
