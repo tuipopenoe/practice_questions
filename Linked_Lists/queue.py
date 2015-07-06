@@ -2,7 +2,7 @@
 # Tui Popenoe
 # queue.py 
 
-class Queue:
+class Queue(object):
     def __init__(self):
         self.items = []
 

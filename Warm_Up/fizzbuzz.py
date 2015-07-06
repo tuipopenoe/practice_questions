@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+# Tui Popenoe
 # fizzbuzz
 
-def fizzbuzz(n=100):
+def fizz_buzz(n=100):
     for i in range(n):
         if fizzbuzz(i):
             print('fizzbuzz')

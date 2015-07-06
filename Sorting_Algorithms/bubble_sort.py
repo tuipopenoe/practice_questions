@@ -2,7 +2,7 @@
 # Tui Popenoe
 # Bubble Sort
 
-import 
+from sys import argv
 
 def bubble_sort(lst):
     for num in range(len(lst)-1, 0, -1):
