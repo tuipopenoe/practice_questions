@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Tui Popenoe
-# 2.2.py remove the middle element 
+# 2.2.py find kth to last element of singly linked list
 
 from node import Node
 from unordered_list import UnorderedList
@@ -9,19 +9,15 @@ class ExtendedList(UnordredList):
     def __init__(self):
         super(UnorderedList, self).__init__()
 
-    def remove_middle_element(self):
+    def find_kth_to_last_element(self, k):
         current_node = self.head
-        if current_node.next:
-            skip_node = current_node.next
-        else:
-            skip_node = None
+        counter = 1 if current_node else counter = 0
         while current_node.next != None:
-            # skip 2 nodes for every 1 current_node
-            if skip_node.next.next != None and skip_node.next != None:
-                skip_node.next = skip_node.next.next
-            # Reached the end of the list
-            # remove current_node
-            else:
-                current_node.next = current_node.next.next
-                break
-            current_node= current_node.next
+            counter += 1
+        counter = counter - k
+        while current_node.next != None:
+            counter -= 1
+            if counter == 0:
+                return current_node
+            current_node = current_node.next
+        return None
