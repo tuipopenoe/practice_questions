@@ -9,7 +9,7 @@ class ExtendedList(UnorderedList):
     def __init__(self):
         super(UnorderedList, self).__init__()
 
-
+    # O(n)
     def remove_duplicates():
         node_data = {}
         duplicates = {}
@@ -35,3 +35,13 @@ class ExtendedList(UnorderedList):
                     del duplicates[check_data]
                 else:
                     duplicates[check_data] -= 1
+
+    # O(n^2)
+    def remove_duplicates_without_buffer():
+        current_node = self.head
+        while current_node.next != None:
+            pointer = current_node.next
+            while pointer.next != None:
+                if current_node.data == pointer.data:
+                    current_node.next = current_node.next.next
+                    break
